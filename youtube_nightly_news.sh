@@ -11,24 +11,26 @@ DOWN_DIR=$HOME
 TMP_DIR=$DOWN_DIR"/_tmp_nightly_news"
 MAX_DW="3"
 
+YOUTUBE_DL=`which youtube-dl`
+
 OIFS="$IFS"
 IFS=$'\n'
 
 cd $DOWN_DIR
 mkdir $TMP_DIR
 
-mv *$BASE_STRING* $TMP_DIR
+mv *$BASE_STRING*.mp4 $TMP_DIR
 
-for ID in `youtube-dl --dateafter now-1week --match-title $BASE_STRING --max-downloads $MAX_DW $PLAYLIST --get-id `; do
+for ID in `$YOUTUBE_DL --dateafter now-1week --match-title $BASE_STRING --max-downloads $MAX_DW $PLAYLIST --get-id `; do
     URL=$BASE_URL$ID
-    FILE=`youtube-dl --get-filename -o '%(title)s.%(ext)s' $URL`
+    FILE=`$YOUTUBE_DL --get-filename -o '%(title)s.%(ext)s' $URL`
 
     if [ -f "$TMP_DIR/$FILE" ]; then
         echo "File [$FILE] exists."
         mv $TMP_DIR/$FILE $TMP_DIR/..
     else
         echo "File [$FILE] does not exists."
-        youtube-dl -f 'best' -o $DOWN_DIR/'%(title)s.%(ext)s' $URL
+        $YOUTUBE_DL -f 'best' -o $DOWN_DIR/'%(title)s.%(ext)s' $URL
     fi
 done
 
