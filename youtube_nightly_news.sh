@@ -1,6 +1,7 @@
 #!/bin/bash
 #This playlist is Nightly News.
-PLAYLIST="https://www.youtube.com/playlist?list=PL0tDb4jw6kPyGy4AIjirldbeP6nxpWGKU"
+#PLAYLIST="https://www.youtube.com/playlist?list=PL0tDb4jw6kPyGy4AIjirldbeP6nxpWGKU"
+PLAYLIST="https://www.youtube.com/user/NBCNews/videos"
 BASE_URL="https://www.youtube.com/watch?v="
 BASE_STRING="Nightly News Broadcast"
 
